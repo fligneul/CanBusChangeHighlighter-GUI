@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.RadioMenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<VBox xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" prefWidth="600" prefHeight="800"
+      fx:controller="com.florian_ligneul.canbus.change_highlighter.view.controller.CanBusChangeHighlighterController">
+    <MenuBar>
+        <Menu text="Setting">
+            <Menu text="Data format">
+                <fx:define>
+                    <ToggleGroup fx:id="dataDisplayFormatToggleGroup"/>
+                </fx:define>
+                <RadioMenuItem text="Binary" toggleGroup="$dataDisplayFormatToggleGroup"/>
+                <RadioMenuItem text="Hexadecimal" toggleGroup="$dataDisplayFormatToggleGroup" selected="true"/>
+                <RadioMenuItem text="Decimal" toggleGroup="$dataDisplayFormatToggleGroup"/>
+                <RadioMenuItem text="Octal" toggleGroup="$dataDisplayFormatToggleGroup"/>
+            </Menu>
+        </Menu>
+    </MenuBar>
+    <VBox spacing="10" VBox.vgrow="ALWAYS">
+        <padding>
+            <Insets topRightBottomLeft="10"/>
+        </padding>
+        <HBox spacing="20" alignment="CENTER_LEFT">
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="Port COM"/>
+                <ComboBox fx:id="comPortComboBox"/>
+            </HBox>
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="BaudRate"/>
+                <ComboBox fx:id="baudRateComboBox"/>
+            </HBox>
+            <Region HBox.hgrow="ALWAYS"/>
+            <ToggleButton fx:id="connectToggleButton" text="Connect"/>
+        </HBox>
+        <TableView fx:id="canBusMessageTableView" VBox.vgrow="ALWAYS">
+            <columns>
+                <TableColumn fx:id="idColumn" maxWidth="95.0" text="ID" resizable="false" sortable="false" styleClass="column-center"/>
+                <TableColumn fx:id="effColumn" maxWidth="40.0" text="EFF" resizable="false" sortable="false" styleClass="column-center"/>
+                <TableColumn fx:id="rtrColumn" maxWidth="40.0" text="RTR" resizable="false" sortable="false" styleClass="column-center"/>
+                <TableColumn fx:id="errColumn" maxWidth="40.0" text="ERR" resizable="false" sortable="false" styleClass="column-center"/>
+                <TableColumn fx:id="dataColumn" text="DATA" sortable="false"/>
+            </columns>
+        </TableView>
+    </VBox>
+</VBox>

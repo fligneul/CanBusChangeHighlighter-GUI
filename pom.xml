@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.florian_ligneul.canbus</groupId>
+    <artifactId>canbus-change-highlighter</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <jSerialComm-version>2.5.3</jSerialComm-version>
+        <junit-version>4.13</junit-version>
+        <fonticon-version>2.0.210</fonticon-version>
+        <rxjava2-version>2.2.17</rxjava2-version>
+        <rxjava2fx-version>2.2.2</rxjava2fx-version>
+        <guice-version>4.1.0</guice-version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.fazecast</groupId>
+            <artifactId>jSerialComm</artifactId>
+            <version>${jSerialComm-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.adrianromero</groupId>
+            <artifactId>fonticon</artifactId>
+            <version>${fonticon-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.reactivex.rxjava2</groupId>
+            <artifactId>rxjava</artifactId>
+            <version>${rxjava2-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.reactivex.rxjava2</groupId>
+            <artifactId>rxjavafx</artifactId>
+            <version>${rxjava2fx-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.inject</groupId>
+            <artifactId>guice</artifactId>
+            <version>${guice-version}</version>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>8</source>
+                    <target>8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    <repositories>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
+    
+</project>

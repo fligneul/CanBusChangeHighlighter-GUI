@@ -1,0 +1,27 @@
+.combo-box .arrow-button{
+    -fx-padding: 0 5 0 5;
+}
+
+.column-center {
+    -fx-alignment: CENTER;
+}
+
+.table-row-cell .text {
+    -fx-font-size: 16px;
+}
+
+.table-row-cell .has-not-changed .text {
+    -fx-fill: BLACK;
+}
+
+.table-row-cell:selected .has-not-changed .text {
+    -fx-fill: WHITE;
+}
+
+.table-row-cell .has-changed .text {
+    -fx-fill: RED;
+}
+
+.table-row-cell:selected .has-changed .text {
+    -fx-fill: DARKRED;
+}
