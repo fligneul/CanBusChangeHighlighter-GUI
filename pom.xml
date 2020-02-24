@@ -7,6 +7,12 @@
     <groupId>com.florian_ligneul.canbus</groupId>
     <artifactId>canbus-change-highlighter</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <url>https://github.com/fligneul/CanBusChangeHighlighter-GUI</url>
+
+    <scm>
+        <url>https://github.com/fligneul/CanBusChangeHighlighter-GUI</url>
+        <developerConnection>scm:git:git@github.com:fligneul/CanBusChangeHighlighter-GUI.git</developerConnection>
+    </scm>
 
     <properties>
         <jSerialComm-version>2.5.3</jSerialComm-version>
@@ -15,6 +21,7 @@
         <rxjava2-version>2.2.17</rxjava2-version>
         <rxjava2fx-version>2.2.2</rxjava2fx-version>
         <guice-version>4.1.0</guice-version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <dependencies>
@@ -49,23 +56,47 @@
             <version>${guice-version}</version>
         </dependency>
     </dependencies>
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>8</source>
-                    <target>8</target>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
     <repositories>
         <repository>
             <id>jitpack.io</id>
             <url>https://jitpack.io</url>
         </repository>
     </repositories>
-    
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>8</source>
+                    <target>8</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.2.0</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <archive>
+                                <manifest>
+                                    <mainClass>com.florian_ligneul.canbus.change_highlighter.Main</mainClass>
+                                </manifest>
+                            </archive>
+                            <descriptorRefs>
+                                <descriptorRef>jar-with-dependencies</descriptorRef>
+                            </descriptorRefs>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>
