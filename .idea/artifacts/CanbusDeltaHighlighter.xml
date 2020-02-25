@@ -1,0 +1,32 @@
+<component name="ArtifactManager">
+  <artifact type="javafx" build-on-make="true" name="CanbusDeltaHighlighter">
+    <output-path>$PROJECT_DIR$/out/artifacts/CanbusDeltaHighlighter</output-path>
+    <properties id="javafx-properties">
+      <options>
+        <option name="appClass" value="com.florian_ligneul.canbus.change_highlighter.Main" />
+        <option name="description" value="" />
+        <option name="htmlPlaceholderId" value="" />
+        <option name="title" value="" />
+        <option name="vendor" value="" />
+        <option name="version" value="" />
+      </options>
+    </properties>
+    <root id="root">
+      <element id="archive" name="canbus_delta_highlighter.jar">
+        <element id="module-output" name="canbus-delta-highlighter" />
+        <element id="directory" name="META-INF">
+          <element id="file-copy" path="$PROJECT_DIR$/src/main/META-INF/MANIFEST.MF" />
+        </element>
+        <element id="library" level="project" name="Maven: aopalliance:aopalliance:1.0" />
+        <element id="library" level="project" name="Maven: com.fazecast:jSerialComm:2.5.3" />
+        <element id="library" level="project" name="Maven: com.github.adrianromero:fonticon:2.0.210" />
+        <element id="library" level="project" name="Maven: com.google.guava:guava:19.0" />
+        <element id="library" level="project" name="Maven: com.google.inject:guice:4.1.0" />
+        <element id="library" level="project" name="Maven: io.reactivex.rxjava2:rxjava:2.2.17" />
+        <element id="library" level="project" name="Maven: io.reactivex.rxjava2:rxjavafx:2.2.2" />
+        <element id="library" level="project" name="Maven: javax.inject:javax.inject:1" />
+        <element id="library" level="project" name="Maven: org.reactivestreams:reactive-streams:1.0.3" />
+      </element>
+    </root>
+  </artifact>
+</component>
