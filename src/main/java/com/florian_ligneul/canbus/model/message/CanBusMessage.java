@@ -56,7 +56,7 @@ public class CanBusMessage {
      * @return a Java CAN bus message
      */
     public static CanBusMessage parseCanBusMessage(byte[] rawMessage) {
-        if (rawMessage.length < 6) { // 4 bytes for id + 1 byte DLC + 1 byte '\n'
+        if (rawMessage.length < 5) { // 4 bytes for id + 1 byte DLC
             throw new IllegalArgumentException("Wrong CAN Bus message size");
         }
 
