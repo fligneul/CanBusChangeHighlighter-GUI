@@ -46,6 +46,11 @@
             <Region HBox.hgrow="ALWAYS"/>
             <ToggleButton fx:id="connectToggleButton" text="Connect"/>
         </HBox>
+        <HBox fx:id="filterHBox" spacing="10" alignment="CENTER_LEFT">
+            <Label text="Filter"/>
+            <TextField fx:id="filterTextField" HBox.hgrow="ALWAYS"/>
+            <Button fx:id="filterResetButton" text="Reset"/>
+        </HBox>
         <TableView fx:id="canBusMessageTableView" VBox.vgrow="ALWAYS">
             <columns>
                 <TableColumn fx:id="idColumn" maxWidth="95.0" text="ID" resizable="false" sortable="false" styleClass="column-center"/>

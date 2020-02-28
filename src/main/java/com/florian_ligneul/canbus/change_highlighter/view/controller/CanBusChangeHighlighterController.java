@@ -11,6 +11,7 @@ import com.florian_ligneul.canbus.model.message.CanBusMessageDatum;
 import com.florian_ligneul.canbus.model.uart.EBaudRate;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
+import javafx.beans.binding.BooleanBinding;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -18,12 +19,14 @@ import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
@@ -53,6 +56,13 @@ public class CanBusChangeHighlighterController implements Initializable {
     private ComboBox<EBaudRate> baudRateComboBox;
     @FXML
     private ToggleButton connectToggleButton;
+
+    @FXML
+    private HBox filterHBox;
+    @FXML
+    private TextField filterTextField;
+    @FXML
+    private Button filterResetButton;
 
     @FXML
     private TableView<CanBusMessage> canBusMessageTableView;
@@ -91,6 +101,7 @@ public class CanBusChangeHighlighterController implements Initializable {
         initMenuControls();
         initConnectionControls();
         initMessageTableViewColumns();
+        initMessageIdFilter();
     }
 
     private void initMenuControls() {
@@ -176,5 +187,21 @@ public class CanBusChangeHighlighterController implements Initializable {
         SortedList<CanBusMessage> canBusMessageSortedList = new SortedList<>(canBusMessageFilteredList);
         canBusMessageSortedList.comparatorProperty().bind(canBusMessageTableView.comparatorProperty());
         canBusMessageTableView.setItems(canBusMessageFilteredList);
+    }
+
+    private void initMessageIdFilter() {
+        // Filter available only when CanBus service is connected
+        filterHBox.disableProperty().bind(BooleanBinding.booleanExpression(canBusConnectionModel.isConnectedProperty()).not());
+        filterResetButton.setOnAction(event -> {
+            filterTextField.clear();
+        });
+        filterTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            canBusMessageFilteredList.setPredicate(canBusMessage -> {
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                return String.format(ID_FORMAT, canBusMessage.getId()).contains(newValue);
+            });
+        });
     }
 }
