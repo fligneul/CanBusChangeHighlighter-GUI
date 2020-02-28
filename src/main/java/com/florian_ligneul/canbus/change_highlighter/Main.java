@@ -10,6 +10,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+import static com.florian_ligneul.canbus.change_highlighter.view.CanBusChangeHighligtherConstants.MAIN_FXML;
+import static com.florian_ligneul.canbus.change_highlighter.view.CanBusChangeHighligtherConstants.THEME_CSS;
+
 /**
  * Launcher class for the CanBus Change Highlighter
  */
@@ -27,14 +30,13 @@ public class Main extends Application {
     public void start(Stage applicationStage) throws IOException {
         Injector injector = Guice.createInjector(new CanBusModule());
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/canBusChangeHighlighter.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(MAIN_FXML));
         loader.setControllerFactory(injector::getInstance);
 
         // Load scene from FXML
         Scene scene = new Scene(loader.load());
         // Add css to the main scene
-        scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
-
+        scene.getStylesheets().add(getClass().getResource(THEME_CSS).toExternalForm());
 
         // Configure stage and display it
         applicationStage.setTitle("CAN Bus Change Highlighter");

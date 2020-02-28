@@ -20,6 +20,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
@@ -39,6 +40,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import static com.florian_ligneul.canbus.change_highlighter.inject.CanBusModule.NAMED_CAN_BUS_READER_SERVICE;
+import static com.florian_ligneul.canbus.change_highlighter.view.CanBusChangeHighligtherConstants.DARK_THEME_CSS;
 
 /**
  * JavaFx controller of the application
@@ -50,6 +52,8 @@ public class CanBusChangeHighlighterController implements Initializable {
 
     @FXML
     private ToggleGroup dataDisplayFormatToggleGroup;
+    @FXML
+    private CheckMenuItem darkModeMenuItem;
     @FXML
     private ComboBox<String> comPortComboBox;
     @FXML
@@ -105,13 +109,21 @@ public class CanBusChangeHighlighterController implements Initializable {
     }
 
     private void initMenuControls() {
-        dataDisplayFormatToggleGroup.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
-            Optional.ofNullable(newValue)
-                    .map(MenuItem.class::cast)
-                    .map(MenuItem::getText)
-                    .map(EMessageDataFormat::fromString)
-                    .ifPresent(formatter -> configService.setDataFormatter(formatter));
-        });
+        dataDisplayFormatToggleGroup.selectedToggleProperty().addListener((observable, oldValue, newValue) ->
+                Optional.ofNullable(newValue)
+                        .map(MenuItem.class::cast)
+                        .map(MenuItem::getText)
+                        .map(EMessageDataFormat::fromString)
+                        .ifPresent(formatter -> configService.setDataFormatter(formatter)));
+        darkModeMenuItem.selectedProperty().addListener((observable, oldValue, newValue) ->
+                Optional.ofNullable(canBusMessageTableView.getScene())
+                        .ifPresent(scene -> {
+                            if (newValue) {
+                                scene.getStylesheets().add(getClass().getResource(DARK_THEME_CSS).toExternalForm());
+                            } else {
+                                scene.getStylesheets().remove(getClass().getResource(DARK_THEME_CSS).toExternalForm());
+                            }
+                        }));
     }
 
     private void initConnectionControls() {
