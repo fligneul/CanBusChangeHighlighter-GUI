@@ -5,6 +5,9 @@ import com.fazecast.jSerialComm.SerialPortEvent;
 import com.florian_ligneul.canbus.change_highlighter.view.model.CanBusConnectionModel;
 import com.google.inject.Inject;
 
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 /**
  * UART implementation of {@link ACanBusReaderService}.
  */
@@ -14,9 +17,7 @@ public class CanBusReaderService extends ACanBusReaderService {
     @Inject
     public CanBusReaderService(CanBusConnectionModel canBusConnectionModel) {
         super(canBusConnectionModel);
-        for (SerialPort commPort : SerialPort.getCommPorts()) {
-            comPortList.add(commPort.getSystemPortName());
-        }
+        refreshComPortAvailableList();
     }
 
     @Override
@@ -41,5 +42,13 @@ public class CanBusReaderService extends ACanBusReaderService {
         comPort.removeDataListener();
         comPort.closePort();
         canBusConnectionModel.setIsConnected(false);
+    }
+
+    private void refreshComPortAvailableList() {
+        comPortList.setAll(
+                Stream.of(SerialPort.getCommPorts())
+                        .map(SerialPort::getSystemPortName)
+                        .collect(Collectors.toList())
+        );
     }
 }
