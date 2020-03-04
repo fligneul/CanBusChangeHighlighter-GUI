@@ -21,6 +21,7 @@ public class CanBusReaderService extends ACanBusReaderService {
 
     @Override
     public void connect() {
+        canBusMessageList.clear();
         comPort = SerialPort.getCommPort(canBusConnectionModel.getComPort());
         comPort.setBaudRate(canBusConnectionModel.getBaudRate());
         if (comPort.openPort()) {

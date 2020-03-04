@@ -22,6 +22,7 @@ public class FakeCanBusReaderService extends ACanBusReaderService {
 
     @Override
     public void connect() {
+        canBusMessageList.clear();
         canBusConnectionModel.setIsConnected(true);
         Random randomGen = new Random();
 
