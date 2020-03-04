@@ -124,6 +124,10 @@ public class CanBusChangeHighlighterController implements Initializable {
         baudRateComboBox.getSelectionModel().selectedItemProperty().addListener((obs, oldV, newV) -> canBusConnectionModel.setBaudRate(newV.getBaudRate()));
         baudRateComboBox.disableProperty().bind(canBusConnectionModel.isConnectedProperty());
 
+        connectToggleButton.disableProperty().bind(
+                comPortComboBox.getSelectionModel().selectedIndexProperty().lessThan(0)
+                        .or(baudRateComboBox.getSelectionModel().selectedIndexProperty().lessThan(0))
+        );
         connectToggleButton.setOnAction(event -> {
             if (canBusConnectionModel.isConnected()) {
                 canBusReaderService.disconnect();
