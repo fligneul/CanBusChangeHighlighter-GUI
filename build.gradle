@@ -27,6 +27,8 @@ dependencies {
 
     // Unit tests
     testImplementation 'junit:junit:4.13'
+    // Guice injection extensions
+    testImplementation "com.google.inject.extensions:guice-testlib:4.2.2"
 }
 
 repositories {

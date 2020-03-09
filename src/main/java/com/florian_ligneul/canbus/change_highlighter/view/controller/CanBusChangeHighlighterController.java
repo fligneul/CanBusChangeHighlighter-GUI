@@ -10,7 +10,6 @@ import com.florian_ligneul.canbus.model.message.CanBusMessage;
 import com.florian_ligneul.canbus.model.message.CanBusMessageDatum;
 import com.florian_ligneul.canbus.model.uart.EBaudRate;
 import com.google.inject.Inject;
-import com.google.inject.name.Named;
 import javafx.beans.binding.BooleanBinding;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -37,8 +36,6 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-
-import static com.florian_ligneul.canbus.change_highlighter.inject.CanBusModule.NAMED_CAN_BUS_READER_SERVICE;
 
 /**
  * JavaFx controller of the application
@@ -84,7 +81,6 @@ public class CanBusChangeHighlighterController implements Initializable {
     private CanBusConnectionModel canBusConnectionModel;
 
     @Inject
-    @Named(NAMED_CAN_BUS_READER_SERVICE)
     private ICanBusReaderService canBusReaderService;
 
     private FilteredList<CanBusMessage> canBusMessageFilteredList;

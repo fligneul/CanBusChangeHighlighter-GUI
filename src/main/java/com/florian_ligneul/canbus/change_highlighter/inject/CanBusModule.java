@@ -8,14 +8,11 @@ import com.florian_ligneul.canbus.change_highlighter.view.model.CanBusConnection
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import com.google.inject.Singleton;
-import com.google.inject.name.Named;
 
 /**
  * GUICE Injection module for CAN bus service
  */
 public class CanBusModule extends AbstractModule {
-    public static final String NAMED_CAN_BUS_READER_SERVICE = "CanBusReaderService";
-    public static final String NAMED_FAKE_CAN_BUS_READER_SERVICE = "FakeCanBusReaderService";
 
     protected void configure() {
         bind(ConfigService.class).asEagerSingleton();
@@ -24,28 +21,18 @@ public class CanBusModule extends AbstractModule {
 
     /**
      * Provide a {@link ICanBusReaderService} implementation based on UART communications.
+     * If application is started with -Dmock=true, {@link FakeCanBusReaderService} is used
      *
      * @param canBusConnectionModel {@link CanBusConnectionModel}
      * @return the {@link CanBusReaderService} for connecting to the Arduino based hardware
      */
     @Provides
     @Singleton
-    @Named(NAMED_CAN_BUS_READER_SERVICE)
     public ICanBusReaderService provideCanBusReaderService(CanBusConnectionModel canBusConnectionModel) {
+        if (Boolean.getBoolean("mock")) {
+            return new FakeCanBusReaderService(canBusConnectionModel);
+        }
         return new CanBusReaderService(canBusConnectionModel);
-    }
-
-    /**
-     * Provide a {@link ICanBusReaderService} testing implementation.
-     *
-     * @param canBusConnectionModel {@link CanBusConnectionModel}
-     * @return a {@link FakeCanBusReaderService} that emit mocked value. Used for testing
-     */
-    @Provides
-    @Singleton
-    @Named(NAMED_FAKE_CAN_BUS_READER_SERVICE)
-    public ICanBusReaderService provideFakeCanBusReaderService(CanBusConnectionModel canBusConnectionModel) {
-        return new FakeCanBusReaderService(canBusConnectionModel);
     }
 
 }
