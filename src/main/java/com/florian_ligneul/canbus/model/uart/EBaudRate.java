@@ -2,6 +2,8 @@ package com.florian_ligneul.canbus.model.uart;
 
 import javafx.util.StringConverter;
 
+import java.util.stream.Stream;
+
 /**
  * UART standard baud rates
  */
@@ -45,8 +47,11 @@ public enum EBaudRate {
             }
 
             @Override
-            public EBaudRate fromString(String name) {
-                return EBaudRate.valueOf(name);
+            public EBaudRate fromString(String baudRate) {
+                return Stream.of(EBaudRate.values())
+                        .filter(bd -> bd.getBaudRate() == Integer.parseInt(baudRate))
+                        .findFirst()
+                        .orElseThrow(IllegalArgumentException::new);
             }
         };
     }

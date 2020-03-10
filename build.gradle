@@ -30,6 +30,8 @@ dependencies {
     testImplementation 'junit:junit:4.13'
     // Guice injection extensions
     testImplementation "com.google.inject.extensions:guice-testlib:4.2.2"
+    // Awaitility
+    testImplementation 'org.awaitility:awaitility:4.0.2'
 }
 
 repositories {
