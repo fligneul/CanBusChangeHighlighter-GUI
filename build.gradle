@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'application'
     id 'net.researchgate.release' version '2.6.0'
+    id 'jacoco'
 }
 
 group 'com.florian_ligneul.canbus'

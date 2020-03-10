@@ -22,6 +22,16 @@ pipeline {
                 }
             }
         }
+        stage('Coverage') {
+            steps {
+                jacoco(
+                    execPattern: 'build/jacoco/*.exec',
+                    classPattern: 'build/classes',
+                    sourcePattern: 'src/main/java',
+                    exclusionPattern: 'src/test*'
+                )
+            }
+        }
         stage ('Build JAR') {
             steps {
                 sh 'gradle jar'
