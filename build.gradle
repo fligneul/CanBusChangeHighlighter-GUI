@@ -43,3 +43,8 @@ application {
     // Define the main class for the application.
     mainClassName = 'com.florian_ligneul.canbus.change_highlighter.Main'
 }
+
+release {
+    failOnCommitNeeded = false
+    tagTemplate = 'v${version}'
+}
