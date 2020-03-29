@@ -12,6 +12,9 @@ public class CanBusMessageTest {
                 (byte) 0x00,
                 (byte) 0x00,
                 (byte) 0x02,
+                (byte) 0x00,
+                (byte) 0x00,
+                (byte) 0x00,
                 (byte) 0x42,
                 (byte) 0xFB};
         CanBusMessage canBusMessage = CanBusMessage.parseCanBusMessage(rawCanBusMessage);
@@ -31,6 +34,9 @@ public class CanBusMessageTest {
                 (byte) 0x35,
                 (byte) 0x86,
                 (byte) 0x02,
+                (byte) 0x00,
+                (byte) 0x00,
+                (byte) 0x00,
                 (byte) 0x42,
                 (byte) 0xFB};
         CanBusMessage canBusMessage = CanBusMessage.parseCanBusMessage(rawCanBusMessage);
@@ -90,6 +96,9 @@ public class CanBusMessageTest {
                 (byte) 0x35,
                 (byte) 0x86,
                 (byte) 0x02,
+                (byte) 0x00,
+                (byte) 0x00,
+                (byte) 0x00,
                 (byte) 0x42,
                 (byte) 0xFB};
         CanBusMessage canBusMessage = CanBusMessage.parseCanBusMessage(rawCanBusMessage);
@@ -100,6 +109,9 @@ public class CanBusMessageTest {
                 (byte) 0x35,
                 (byte) 0x86,
                 (byte) 0x02,
+                (byte) 0x00,
+                (byte) 0x00,
+                (byte) 0x00,
                 (byte) 0xA7,
                 (byte) 0xFB};
         CanBusMessage canBusNewMessage = CanBusMessage.parseCanBusMessage(rawCanBusNewMessage);
@@ -119,6 +131,9 @@ public class CanBusMessageTest {
                 (byte) 0x35,
                 (byte) 0x86,
                 (byte) 0x02,
+                (byte) 0x00,
+                (byte) 0x00,
+                (byte) 0x00,
                 (byte) 0x42,
                 (byte) 0xFB};
         Assert.assertNotNull(CanBusMessage.parseCanBusMessage(rawCanBusMessage).toString());

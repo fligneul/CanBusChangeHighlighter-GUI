@@ -27,7 +27,7 @@ public class FakeCanBusReaderService extends ACanBusReaderService {
         Random randomGen = new Random();
 
         mockServiceSub = Observable.interval(1, TimeUnit.SECONDS)
-                .doOnNext(i -> handleNewMessage(new byte[]{0x0, 0x40, 0x35, (byte) 0x86, 0x2, (byte) randomGen.nextInt(2), (byte) randomGen.nextInt(255)}))
+                .doOnNext(i -> handleNewMessage(new byte[]{0x0, 0x40, 0x35, (byte) 0x86, 0x2, 0x0, 0x0, 0x0, (byte) randomGen.nextInt(2), (byte) randomGen.nextInt(255)}))
                 .subscribe();
     }
 

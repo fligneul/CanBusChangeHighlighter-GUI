@@ -13,15 +13,23 @@ import javafx.collections.FXCollections;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 /**
  * Represent a CAN bus message
+ * Message structure
+ * 4 bytes: ID
+ * 1 byte: DLC
+ * 3 bytes: padding
+ * 8 bytes: data
+ * -> 16 bytes
  */
 public class CanBusMessage {
+    public static int CAN_MESSAGE_SIZE = 16;
+
     private static long CAN_EFF_FLAG = 0x80000000L;
     private static long CAN_RTR_FLAG = 0x40000000L;
     private static long CAN_ERR_FLAG = 0x20000000L;
@@ -30,8 +38,8 @@ public class CanBusMessage {
     private static long CAN_EFF_MASK = 0x1FFFFFFFL;
 
     private static final int ID_BYTE_LENGTH = 4;
-    private static final int DLC_BYTE_POSITION = 4;
-    private static final int DATA_BYTE_OFFSET = 5;
+    private static final int DLC_BYTE_OFFSET = 4;
+    private static final int DATA_BYTE_OFFSET = 8;
 
     private final IntegerProperty id;
     private final BooleanProperty isExtendedFrameFormat;
@@ -60,7 +68,9 @@ public class CanBusMessage {
             throw new IllegalArgumentException("Wrong CAN Bus message size");
         }
 
-        int rawId = ByteBuffer.wrap(rawMessage, 0, ID_BYTE_LENGTH).order(ByteOrder.LITTLE_ENDIAN).getInt();
+        int rawId = ByteBuffer.wrap(rawMessage, 0, ID_BYTE_LENGTH)
+                .order(ByteOrder.LITTLE_ENDIAN)
+                .getInt();
 
         boolean isExtendedFrameFormat = (rawId & CAN_EFF_FLAG) > 0;
         boolean isRemoteTransmissionRequest = (rawId & CAN_RTR_FLAG) > 0;
@@ -68,15 +78,21 @@ public class CanBusMessage {
 
         int id = (int) (rawId & (isExtendedFrameFormat ? CAN_EFF_MASK : CAN_SFF_MASK));
 
-        int dlc = rawMessage[DLC_BYTE_POSITION];
-        List<CanBusMessageDatum> data = new ArrayList<>();
+        int dlc = rawMessage[DLC_BYTE_OFFSET];
+        if (dlc > 8) {
+            throw new IllegalArgumentException("Wrong CAN Bus DLC");
+        }
 
-        IntStream.range(0, dlc)
-                .map(idx -> rawMessage[idx + DATA_BYTE_OFFSET] & 0xFF)
-                .mapToObj(CanBusMessageDatum::new)
-                .forEach(data::add);
-
-        return new CanBusMessage(id, isExtendedFrameFormat, isRemoteTransmissionRequest, isErrorMessage, dlc, data);
+        return new CanBusMessage(id,
+                isExtendedFrameFormat,
+                isRemoteTransmissionRequest,
+                isErrorMessage,
+                dlc,
+                IntStream.range(0, dlc)
+                        .map(idx -> rawMessage[idx + DATA_BYTE_OFFSET] & 0xFF)
+                        .mapToObj(CanBusMessageDatum::new)
+                        .collect(Collectors.toList())
+        );
     }
 
     /**

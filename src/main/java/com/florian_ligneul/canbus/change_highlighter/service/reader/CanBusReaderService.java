@@ -5,6 +5,8 @@ import com.fazecast.jSerialComm.SerialPortEvent;
 import com.florian_ligneul.canbus.change_highlighter.view.model.CanBusConnectionModel;
 import com.google.inject.Inject;
 
+import static com.florian_ligneul.canbus.model.message.CanBusMessage.CAN_MESSAGE_SIZE;
+
 /**
  * UART implementation of {@link ACanBusReaderService}.
  */
@@ -29,7 +31,9 @@ public class CanBusReaderService extends ACanBusReaderService {
             ACanBusMessageListener listener = new ACanBusMessageListener() {
                 @Override
                 public void serialEvent(SerialPortEvent event) {
-                    handleNewMessage(event.getReceivedData());
+                    if (event.getReceivedData().length == CAN_MESSAGE_SIZE) {
+                        handleNewMessage(event.getReceivedData());
+                    }
                 }
             };
             comPort.addDataListener(listener);

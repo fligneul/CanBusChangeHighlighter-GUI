@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Clear message list on new connection
 - Update dependencies
+- Change Serial read mode from delimiter to message
 
 ### Fixed
 - Disable connection if COM port or baud rate is not set.
