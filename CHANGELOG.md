@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.0] - 2020-03-29
 ### Added
 - Explanation of the recommended reverse chronological release ordering.
 - JVM argument for mocked data
@@ -25,5 +26,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Highlight change when new message is received.
 - Add message ID filtering.
 
-[Unreleased]: https://github.com/fligneul/CanBusChangeHighlighter-GUI/compare/v1.0...HEAD
+[Unreleased]: https://github.com/fligneul/CanBusChangeHighlighter-GUI/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/fligneul/CanBusChangeHighlighter-GUI/releases/tag/v1.1.0
 [1.0]: https://github.com/fligneul/CanBusChangeHighlighter-GUI/releases/tag/v1.0
